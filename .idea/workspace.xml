@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="db6d5c33-e11f-41bb-8e11-9c58c26d096d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cipherLibrary.php" afterPath="$PROJECT_DIR$/cipherLibrary.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="db6d5c33-e11f-41bb-8e11-9c58c26d096d" name="Default" comment="" />
     <ignored path="OnlineCipher.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -28,10 +25,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="cipherLibrary.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="cipherLibrary.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cipherLibrary.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.17918089" vertical-offset="0" max-vertical-offset="586">
+            <state vertical-scroll-proportion="-4.375" vertical-offset="0" max-vertical-offset="450">
               <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
               <folding />
             </state>
@@ -48,10 +45,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="signup.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="signup.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/signup.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.625" vertical-offset="465" max-vertical-offset="1800">
+            <state vertical-scroll-proportion="1.1518772" vertical-offset="285" max-vertical-offset="1800">
               <caret line="64" column="35" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
               <folding>
                 <marker date="1539713643655" expanded="true" signature="419:472" placeholder="SELECT email..userinfo..." />
@@ -361,18 +358,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/signup.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.625" vertical-offset="465" max-vertical-offset="1800">
-          <caret line="64" column="35" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
-          <folding>
-            <marker date="1539713643655" expanded="true" signature="419:472" placeholder="SELECT email..userinfo..." />
-            <marker date="1539713643655" expanded="true" signature="786:1036" placeholder="INSERT INTO ..." />
-            <marker date="1539713643655" expanded="true" signature="1293:1621" placeholder="INSERT INTO ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/footer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-20.625" vertical-offset="0" max-vertical-offset="690">
@@ -383,9 +368,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cipherLibrary.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17918089" vertical-offset="0" max-vertical-offset="586">
+        <state vertical-scroll-proportion="-4.375" vertical-offset="0" max-vertical-offset="450">
           <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/signup.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1518772" vertical-offset="285" max-vertical-offset="1800">
+          <caret line="64" column="35" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
+          <folding>
+            <marker date="1539713643655" expanded="true" signature="419:472" placeholder="SELECT email..userinfo..." />
+            <marker date="1539713643655" expanded="true" signature="786:1036" placeholder="INSERT INTO ..." />
+            <marker date="1539713643655" expanded="true" signature="1293:1621" placeholder="INSERT INTO ..." />
+          </folding>
         </state>
       </provider>
     </entry>
