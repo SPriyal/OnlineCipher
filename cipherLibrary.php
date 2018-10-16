@@ -4,8 +4,8 @@
 function getCipherList()
 {
     $html = "";
-    $html .= "<li><a href=\"caesarcipher.php\">Caesar Cipher</a></li>";
-    $html .= "<li><a href=\"vigenerecipher.php\">Vigenere Cipher (PolyAlphabetic)</a></li>";
+    $html .= "<li><a href=\"#\">Caesar Cipher</a></li>";
+    $html .= "<li><a href=\"#\">Vigenere Cipher (PolyAlphabetic)</a></li>";
     $html .= "<li><a href=\"#\">MonoAlphabetic Cipher</a></li>";
     $html .= "<li><a href=\"#\">Rail Fence Cipher</a></li>";
     return $html;
