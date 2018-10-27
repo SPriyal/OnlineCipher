@@ -2,17 +2,47 @@
 <?php include_once'config.php'; ?>
 <?php
 if(isset($_SESSION["userEmail"])){
-    //echo "<!-- Dashboard ->\n";
-    echo "This is dashboard for sprint 2";
+    //echo "<!-- Dashboard ->\n"; 
+    echo "        <header class=\"major\">\n"; 
+    echo "            <h2>Account Dashboard</h2>\n"; 
+    echo "            <p>Download the Source Code & View History</p>\n"; 
+    echo "        </header>\n"; 
+    echo "        <div class=\"container\">\n"; 
+    echo "            <div class=\"row\">\n"; 
+    echo "                <div class=\"4u\">\n"; 
+    echo "                    <section>\n"; 
+    echo "                        <h3>Operations</h3>\n"; 
+    echo "                        <ul class=\"alt\">\n"; 
+    echo "                            <li><a href=\"#userprofile\">Profile</a></li>\n";
+    echo "                            <li><a href=\"#userhistory\">History</a></li>\n";
+    echo "                        </ul>\n"; 
+    echo "                    </section>\n"; 
+    echo "                </div>\n"; 
+    echo "                <div class=\"8u skel-cell-important\">\n"; 
+    echo "                    <section id=userprofile >\n"; 
+                                        echo getProfile();
+    echo "                    </section>\n"; 
+	echo "                    <section id=userhistory >\n"; 
+                                    echo deactivate();
+									echo confirmDeactivate();
+    echo "                    </section>\n"; 
+    echo "                    <section id=userhistory >\n"; 
+    echo "                          <br><br>";
+                                    echo getHistory();
+    echo "                          <br><br>";                                
+    echo "                    </section>\n"; 
+    echo "                </div>\n"; 
+    echo "            </div>\n"; 
+    echo "        </div>\n";
 } else {
     if (($_SERVER['REQUEST_METHOD'] === 'POST')) {
         $userPassword = $_POST["pass_confirmation"];
         $userEmail=$_POST["userEmailid"];
         $qry = mysqli_query($con,"SELECT email,password FROM userinfo WHERE email = '$userEmail';");
         $check = mysqli_fetch_assoc($qry);
-        if (($userEmail == $check['email'])
-            && ($userPassword == $check['password'])
-            && ($userEmail != NULL)
+        if (($userEmail == $check['email']) 
+            && ($userPassword == $check['password']) 
+            && ($userEmail != NULL) 
             && ($userPassword != NULL)) {
                 $_SESSION['userEmail'] = $userEmail;
                 $_SESSION['userPassword']=$userPassword;
