@@ -5,7 +5,7 @@ function getCipherList()
 {
     $html = "";
     $html .= "<li><a href=\"caesarcipher.php\">Caesar Cipher</a></li>";
-    $html .= "<li><a href=\"#\">Vigenere Cipher (PolyAlphabetic)</a></li>";
+    $html .= "<li><a href=\"vigenerecipher.php\">Vigenere Cipher (PolyAlphabetic)</a></li>";
     $html .= "<li><a href=\"#\">MonoAlphabetic Cipher</a></li>";
     $html .= "<li><a href=\"#\">Rail Fence Cipher</a></li>";
     return $html;
@@ -23,7 +23,7 @@ function getAlgoList()
 
 function caesar($str, $n)
 {
-    include 'config.php';
+    include "config.php";
     $ret = "";
     for ($i = 0, $l = strlen($str); $i < $l; ++$i) {
         $c = ord($str[$i]);
@@ -37,11 +37,27 @@ function caesar($str, $n)
     }
     if (isset($_SESSION['userEmail'])) {
         $uemail = $_SESSION['userEmail'];
-        $query = mysqli_query($con, "INSERT INTO userhistory(`id`,`email`, `cipher`, `userstring`,`cipherkey`,`datetime`,`encryptedtext`)
-					VALUES ('','$uemail','Caesar Cipher','$str','$n',NOW(),'$ret')");
+
+        $stmt = $con->prepare("INSERT INTO userhistory(email, cipher, userstring, datetime, encryptedtext)  VALUES (?, ?, ?, NOW(), ?)");
+        $ciphername = 'Caesar Cipher';
+        $stmt->bind_param("ssss", $uemail, $ciphername, $str, $ret);
+        $stmt->execute();
+        $stmt->close();
+
+
+
+//        $query = mysqli_query($con, "INSERT INTO userhistory('id','email', 'cipher', 'userstring','cipherkey','datetime','encryptedtext')
+//					VALUES ('','$uemail','Caesar Cipher','$str','$n',NOW(),'$ret')");
+//        $check = mysqli_fetch_assoc($query);
     }
     return $ret;
 }
+
+
+
+
+
+
 
 function getProfile()
 {
