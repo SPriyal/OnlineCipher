@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db6d5c33-e11f-41bb-8e11-9c58c26d096d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/decryptresults.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/caesarcipher.php" afterPath="$PROJECT_DIR$/caesarcipher.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vigenerecipher.php" afterPath="$PROJECT_DIR$/vigenerecipher.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="OnlineCipher.iws" />
     <ignored path=".idea/workspace.xml" />
