@@ -54,6 +54,32 @@ function caesar($str, $n)
 }
 
 
+function caesar_decrypt($str, $offset) {
+    $decrypted_text = "";
+    $offset = $offset % 26;
+    if($offset < 0) {
+        $offset += 26;
+    }
+    $i = 0;
+    while($i < strlen($str)) {
+        $c = strtoupper($str{$i});
+        if(($c >= "A") && ($c <= 'Z')) {
+            if((ord($c) - $offset) < ord("A")) {
+                $decrypted_text .= chr(ord($c) - $offset + 26);
+            } else {
+                $decrypted_text .= chr(ord($c) - $offset);
+            }
+        } else {
+            $decrypted_text .= " ";
+        }
+        $i++;
+    }
+    return $decrypted_text;
+}
+
+
+
+
 
 function VigenereCipher($plainText,$key)
 {
@@ -90,6 +116,71 @@ function VigenereCipher($plainText,$key)
     else
         return "Please Enter Alphbetic key for Vegenere Cipher or PolyAlphabetic Cipher";
 }
+
+
+
+function Vigenere_decrypt($text, $pswd)
+{
+    // change key to lowercase for simplicity
+    $pswd = strtolower($pswd);
+
+    // intialize variables
+    $code = "";
+    $ki = 0;
+    $kl = strlen($pswd);
+    $length = strlen($text);
+
+    // iterate over each line in text
+    for ($i = 0; $i < $length; $i++)
+    {
+        // if the letter is alpha, decrypt it
+        if (ctype_alpha($text[$i]))
+        {
+            // uppercase
+            if (ctype_upper($text[$i]))
+            {
+                $x = (ord($text[$i]) - ord("A")) - (ord($pswd[$ki]) - ord("a"));
+
+                if ($x < 0)
+                {
+                    $x += 26;
+                }
+
+                $x = $x + ord("A");
+
+                $text[$i] = chr($x);
+            }
+
+            // lowercase
+            else
+            {
+                $x = (ord($text[$i]) - ord("a")) - (ord($pswd[$ki]) - ord("a"));
+
+                if ($x < 0)
+                {
+                    $x += 26;
+                }
+
+                $x = $x + ord("a");
+
+                $text[$i] = chr($x);
+            }
+
+            // update the index of key
+            $ki++;
+            if ($ki >= $kl)
+            {
+                $ki = 0;
+            }
+        }
+    }
+
+    // return the decrypted text
+    return $text;
+}
+
+
+
 
 
 
