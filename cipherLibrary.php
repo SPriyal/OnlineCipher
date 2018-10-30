@@ -55,7 +55,41 @@ function caesar($str, $n)
 
 
 
+function VigenereCipher($plainText,$key)
+{
+    $key1=$key;
+    include "config.php";
+    $plainText= strtoupper($plainText);
+    $key= strtoupper($key);
+    if(ctype_alpha($key)==true)
+    {
+        $plain_text=str_split($plainText);
+        $n=count($plain_text);
+        $key=str_split($key);
+        $m=count($key);
+        $encrypted_text="";
+        for ($i=0; $i<$n;$i++)
+        {
+            $encrypted_text.=chr(((ord($plain_text[$i])-65+ord($key[$i%$m])-65)%26) +65);
+        }
+        if(isset($_SESSION['userEmail'])){
+            $uemail=$_SESSION['userEmail'];
 
+            $stmt = $con->prepare("INSERT INTO userhistory(email, cipher, userstring, datetime, encryptedtext)  VALUES (?, ?, ?, NOW(), ?)");
+            $ciphername = 'Vigenere Cipher';
+            $stmt->bind_param("ssss", $uemail, $ciphername, $plainText, $encrypted_text);
+            $stmt->execute();
+            $stmt->close();
+
+
+//            $query = mysqli_query($con,"INSERT INTO userhistory(`id`,`email`, `cipher`, `userstring`,`cipherkey`,`datetime`,`encryptedtext`)
+//					VALUES ('','$uemail','Vegenere Cipher','$plainText','$key1',NOW(),'$encrypted_text')");
+        }
+        return $encrypted_text;
+    }
+    else
+        return "Please Enter Alphbetic key for Vegenere Cipher or PolyAlphabetic Cipher";
+}
 
 
 
