@@ -54,7 +54,7 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST')) {
                     ?,
                     NOW()
                     )");
-                    $stmt->bind_param("sss", $userName, $userEmail, $userPassword);
+                    $stmt->bind_param("sss", $userName, $userEmail, password_hash($userPassword, PASSWORD_DEFAULT));
                     $stmt->execute();
                     $stmt->close();
 
@@ -62,7 +62,11 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST')) {
         $_SESSION['userEmail'] = $userEmail;
         $_SESSION['SuccessfullLogin'] = true;
         setcookie("lastloginday", date("Y-m-d"), time() + (86400 * 30), "/");
-        header("Location: dashboard.php");
+        echo "<script type=\"text/javascript\">location.href = 'dashboard.php';</script>";
+        exit();
+
+
+//        header("Location: dashboard.php");
     } else {
         header("Location:email.php");
     }

@@ -41,14 +41,15 @@ if(isset($_SESSION["userEmail"])){
         $qry = mysqli_query($con,"SELECT email,password FROM userinfo WHERE email = '$userEmail';");
         $check = mysqli_fetch_assoc($qry);
         if (($userEmail == $check['email']) 
-            && ($userPassword == $check['password']) 
+            && (password_verify($userPassword,$check['password']))
             && ($userEmail != NULL) 
             && ($userPassword != NULL)) {
                 $_SESSION['userEmail'] = $userEmail;
                 $_SESSION['userPassword']=$userPassword;
                 $_SESSION['SuccessfullLogin'] = true;
-                setcookie("lastloginday", date("Y-m-d"), time() + (86400 * 30), "/");
-                header("Location: dashboard.php");
+                setcookie("lastloginday", date("Y-m-d"), time() + (86400 * 30));
+                echo "<script type=\"text/javascript\">location.href = 'dashboard.php';</script>";
+                exit();
         } else {
             echo "&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Invalid Email-id / Password. Try Again.<br>";
             echo getSignInForm();
