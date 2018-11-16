@@ -32,7 +32,7 @@
             </div>
             <ul class="copyright">
                 <li>&copy; CS561 All rights reserved.</li>
-                <li>Design: <a href="#">CS561</a></li>
+                <li>Design: <a href="https://github.com/SPriyal/OnlineCipher">CS561</a></li>
                 <li>Images: Wikimedia</li>
             </ul>
         </div>

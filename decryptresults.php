@@ -17,7 +17,7 @@
             <div class="8u skel-cell-important">
                 <section>
                     <?php
-                    date_default_timezone_set("Asia/Kolkata");
+//                    date_default_timezone_set("Asia/Kolkata");
                     if($_POST["cipherName"]=='CAESAR CIPHER'){
                         if($_POST["caesarKey"])
                         {
@@ -74,6 +74,27 @@
                         }
                         else
                             echo "Please Enter Key for Caesar Cipher";
+                    }
+                    else if($_POST["cipherName"]=='Blowfish'){
+                        if($_POST["blowfishKey"])
+                        {
+                            if($_FILES["CipherFile"]["name"])
+                            {
+                                if(isset($_SESSION['userEmail'])){
+                                    $uemail=$_SESSION['userEmail'];
+                                    $target_dir = "CipherPlainUploads/";
+                                    $time = date("Y-m-d-His");
+                                    $target_file = $target_dir . "$uemail-".$time."-". basename($_FILES["CipherFile"]["name"]);
+                                }
+                            }
+                            else
+                            {
+                                echo "<h3>Decrypted Text : &nbsp</h3>";
+                                echo "<blockquote><b>".blow_decrypt($_POST["blowfishEncryptedtext"],$_POST["blowfishKey"])."</b></blockquote>";
+                            }
+                        }
+                        else
+                            echo "Please Enter Key for Caesar Cipher decryption";
                     }
                     ?>
                 </section>

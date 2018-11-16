@@ -6,7 +6,7 @@ function getCipherList()
     $html = "";
     $html .= "<li><a href=\"caesarcipher.php\">Caesar Cipher</a></li>";
     $html .= "<li><a href=\"vigenerecipher.php\">Vigenere Cipher (PolyAlphabetic)</a></li>";
-    $html .= "<li><a href=\"#\">MonoAlphabetic Cipher</a></li>";
+    $html .= "<li><a href=\"blowfishUI.php\">Blowfish Encryption</a></li>";
     $html .= "<li><a href=\"#\">Rail Fence Cipher</a></li>";
     return $html;
 }
@@ -180,8 +180,56 @@ function Vigenere_decrypt($text, $pswd)
 }
 
 
+function blow($plaintext,$key)
+{
+    require_once('blowfish.php');
+    include "config.php";
+    $IV = "What about this initialisation vector?";
+    $ciphertext ="";
+
+    $ciphertext = Blowfish::encrypt(
+        $plaintext,
+        $key, # encryption key
+        Blowfish::BLOWFISH_MODE_CBC, # Encryption Mode
+        Blowfish::BLOWFISH_PADDING_RFC, # Padding Style
+        $IV  # Initialisation Vector - required for CBC
+    );
+
+    $ciphertext = bin2hex($ciphertext);
+
+    if (isset($_SESSION['userEmail'])) {
+        $uemail = $_SESSION['userEmail'];
+        $stmt = $con->prepare("INSERT INTO userhistory(email, cipher, userstring, datetime, encryptedtext)  VALUES (?, ?, ?, NOW(), ?)");
+        $ciphername = 'Blowfish';
+        $stmt->bind_param("ssss", $uemail, $ciphername, $plaintext, $ciphertext);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    return $ciphertext;
+
+}
 
 
+function blow_decrypt($ciphertext,$key)
+{
+    require_once('blowfish.php');
+
+    $IV = "What about this initialisation vector?";
+
+    $ciphertext = hex2bin($ciphertext);
+
+    $plaintext = Blowfish::decrypt(
+        $ciphertext,
+        $key,
+        Blowfish::BLOWFISH_MODE_CBC, # Encryption Mode
+        Blowfish::BLOWFISH_PADDING_RFC, # Padding Style
+        $IV  # Initialisation Vector - required for CBC
+    );
+
+    return $plaintext;
+
+}
 
 
 function getProfile()
@@ -214,14 +262,14 @@ function getProfile()
     if ($imagepath)
         $html .= "             <th width = 15%>Profile Pic: </th>\n";
     $html .= "         </tr>\n";
-    $html .= "         <tr>\n";
-    $html .= "            <th>Last login :</th>\n";
-    $html .= "             <td>";
-    $html .= $_COOKIE["lastloginday"];
-    $html .= "             </td>\n";
-    if ($imagepath)
-        $html .= "             <td></td>";
-    $html .= "         </tr>\n";
+//    $html .= "         <tr>\n";
+//    $html .= "            <th>Last login :</th>\n";
+//    $html .= "             <td>";
+//    $html .= $_COOKIE["lastloginday"];
+//    $html .= "             </td>\n";
+//    if ($imagepath)
+//        $html .= "             <td></td>";
+//    $html .= "         </tr>\n";
     $html .= "         </table>\n";
     return $html;
 }
@@ -236,7 +284,7 @@ function getHistory()
         <th></th>
 		<th>Cipher Used</th>
         <th>Plain Text</th>
-        <th>Cipher Key</th>
+
         <th>Encrypted Text</th>
         <th>Date & Time</th>
         </tr>";
@@ -250,7 +298,7 @@ function getHistory()
                     <td><input type=\"checkbox\" name=\"selectedCipher[]\" value=\"" . $row['id'] . "\"	></td>
                     <td>" . $row['cipher'] . "</td>
                     <td>" . $row['userstring'] . "</td>
-                    <td>" . $row['cipherkey'] . "</td>
+
                     <td>" . $row['encryptedtext'] . "</td>
                     <td>" . $row['datetime'] . "</td>
                 </tr>";
