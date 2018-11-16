@@ -17,7 +17,7 @@
                 <div class="8u skel-cell-important">
                     <section>
                         <?php 
-							date_default_timezone_set("Asia/Kolkata");
+//							date_default_timezone_set("Asia/Kolkata");
 							if($_POST["cipherName"]=='CAESAR CIPHER'){
 								if($_POST["caesarKey"])
 								{
@@ -33,7 +33,10 @@
 									else
 									{
 										echo "<h3>Encrypted Text : &nbsp</h3>";
-										echo "<blockquote><b>".caesar($_POST["caesarPlaintext"],$_POST["caesarKey"])."</b></blockquote>";
+                                        $reply = caesar($_POST["caesarPlaintext"],$_POST["caesarKey"]);
+										echo "<blockquote><b>".$reply."</b></blockquote>";
+                                        echo "<a href=\"http://twitter.com/share?text=$reply<--Encrypted using-->&url=http://web.engr.oregonstate.edu/~shahpri/OnlineCipher/&hashtags=Crypto,Encryption,NoOneKnowsWhatITwitted\" class=\"twitter-share-button\" data-show-count=\"true\">Tweet</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>";
+
 									}
 								}
 								else
@@ -69,11 +72,37 @@
                                     else
                                     {
                                         echo "<h3>Encrypted Text : &nbsp</h3>";
-                                        echo "<blockquote><b>".VigenereCipher($_POST["VigenerePlaintext"],$_POST["VigenereKey"])."</b></blockquote>";
+                                        $reply=VigenereCipher($_POST["VigenerePlaintext"],$_POST["VigenereKey"]);
+                                        echo "<blockquote><b>".$reply."</b></blockquote>";
+                                        echo "<a href=\"http://twitter.com/share?text=$reply<--Encrypted using-->&url=http://web.engr.oregonstate.edu/~shahpri/OnlineCipher/&hashtags=Crypto,Encryption,NoOneKnowsWhatITwitted\" class=\"twitter-share-button\" data-show-count=\"true\">Tweet</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>";
                                     }
                                 }
                                 else
-                                    echo "Please Enter Key for Caesar Cipher";
+                                    echo "Please Enter the correct Key for Cipher";
+                            }
+                            else if($_POST["cipherName"]=='Blowfish'){
+                                if($_POST["blowfishKey"])
+                                {
+                                    if($_FILES["CipherFile"]["name"])
+                                    {
+                                        if(isset($_SESSION['userEmail'])){
+                                            $uemail=$_SESSION['userEmail'];
+                                            $target_dir = "CipherPlainUploads/";
+                                            $time = date("Y-m-d-His");
+                                            $target_file = $target_dir . "$uemail-".$time."-". basename($_FILES["CipherFile"]["name"]);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        echo "<h3>Encrypted Text : &nbsp</h3>";
+                                        $reply = blow($_POST["blowfishPlaintext"],$_POST["blowfishKey"]);
+                                        echo "<blockquote><b>".$reply."</b></blockquote>";
+                                        echo "<a href=\"http://twitter.com/share?text=$reply <--Encrypted using--> &url=http://web.engr.oregonstate.edu/~shahpri/OnlineCipher/&hashtags=Crypto,Encryption,NoOneKnowsWhatITwitted\" class=\"twitter-share-button\" data-show-count=\"true\">Tweet</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>";
+
+                                    }
+                                }
+                                else
+                                    echo "Please Enter inputs properly";
                             }
 						?>
                     </section>
