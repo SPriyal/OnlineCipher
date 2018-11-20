@@ -1,4 +1,5 @@
 <?php include'header.php'; ?>
+
 <!-- Banner -->
     <section id="banner">
         <div class="inner">
