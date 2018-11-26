@@ -560,7 +560,9 @@ class RSA
             $rsa = openssl_pkey_new(array('private_key_bits' => $bits) + $config);
             openssl_pkey_export($rsa, $privatekey, null, $config);
             $publickey = openssl_pkey_get_details($rsa);
+            
             $publickey = $publickey['key'];
+           
 
             $privatekey = call_user_func_array(array($this, '_convertPrivateKey'), array_values($this->_parseKey($privatekey, self::PRIVATE_FORMAT_PKCS1)));
             $publickey = call_user_func_array(array($this, '_convertPublicKey'), array_values($this->_parseKey($publickey, self::PUBLIC_FORMAT_PKCS1)));

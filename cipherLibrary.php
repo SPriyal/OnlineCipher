@@ -211,7 +211,6 @@ function blow($plaintext,$key)
 
 }
 
-
 function blow_decrypt($ciphertext,$key)
 {
     require_once('blowfish.php');
@@ -231,6 +230,49 @@ function blow_decrypt($ciphertext,$key)
     return $plaintext;
 
 }
+
+function rsa($plaintext,$key)
+{
+    include 'vendor/autoload.php';
+     $rsa = new \phpseclib\Crypt\RSA();
+     extract($rsa->createKey());
+
+     $rsa->loadKey($privatekey);
+
+     $ciphertext = $rsa->encrypt($plaintext);
+
+     $pk = $rsa->getpublickey();
+     $ct = bin2hex($ciphertext);
+
+     //return $ciphertext;
+
+     $result = array(
+         "key" => $pk,
+         "text" => $ct
+     );
+
+    return $result;
+
+
+}
+
+// function rsa_decrypt($ciphertext,$key)
+// {
+//     include 'vendor/autoload.php';
+//     $rsa = new \phpseclib\Crypt\RSA();
+
+//     $ciphertext = hex2bin($ciphertext);
+//     $rsa->setPublicKey($key);
+//     $rsa->loadKey($key);
+   
+
+//     $plaintext = $rsa->decrypt($ciphertext);
+    
+//     return $plaintext;
+
+    
+
+// }
 
 
 function getProfile()

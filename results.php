@@ -104,9 +104,40 @@
                                 else
                                     echo "Please Enter inputs properly";
                             }
+                            else if($_POST["cipherName"]=='rsa'){
+                                if($_POST["rsaKey"])
+                                {
+                                    if($_FILES["CipherFile"]["name"])
+                                    {
+                                        if(isset($_SESSION['userEmail'])){
+                                            $uemail=$_SESSION['userEmail'];
+                                            $target_dir = "CipherPlainUploads/";
+                                            $time = date("Y-m-d-His");
+                                            $target_file = $target_dir . "$uemail-".$time."-". basename($_FILES["CipherFile"]["name"]);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        echo "<h3>Encrypted Text : &nbsp</h3>";
+                                        $reply = rsa($_POST["rsaPlaintext"],$_POST["rsaKey"]);
+                                        
+                                        echo "<blockquote><b>".$reply["text"]."</b></blockquote>";
+                                        //echo "<input type=button value='copy encrypted text'>";  
+                                                                               
+                                        echo "<blockquote id='blc'><b>".$reply["key"]."</b></blockquote>";                                        
+                                        //echo "<input type=button onclick=\"myfunc()\" value='copy Key'>";                                       
+
+                                        echo "<a href=\"http://twitter.com/share?text=$reply <--Encrypted using--> &url=http://web.engr.oregonstate.edu/~shahpri/OnlineCipher/&hashtags=Crypto,Encryption,NoOneKnowsWhatITwitted\" class=\"twitter-share-button\" data-show-count=\"true\">Tweet</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>";
+
+                                    }
+                                }
+                                else
+                                    echo "Please Enter inputs properly";
+                            }
 						?>
                     </section>
                 </div>
             </div>
-        </div>      
+        </div> 
+          
 <?php include'footer.php'; ?>
