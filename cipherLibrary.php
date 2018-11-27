@@ -256,23 +256,23 @@ function rsa($plaintext,$key)
 
 }
 
-// function rsa_decrypt($ciphertext,$key)
-// {
-//     include 'vendor/autoload.php';
-//     $rsa = new \phpseclib\Crypt\RSA();
+function rsa_decrypt($ciphertext,$key)
+{
+    include 'vendor/autoload.php';
+    $rsa = new \phpseclib\Crypt\RSA();
 
-//     $ciphertext = hex2bin($ciphertext);
-//     $rsa->setPublicKey($key);
-//     $rsa->loadKey($key);
+    $ciphertext = hex2bin($ciphertext);
+    $rsa->setPublicKey($key);
+    $rsa->loadKey($key);
    
 
-//     $plaintext = $rsa->decrypt($ciphertext);
+    $plaintext = $rsa->decrypt($ciphertext);
     
-//     return $plaintext;
+    return $plaintext;
 
     
 
-// }
+}
 
 
 function getProfile()
