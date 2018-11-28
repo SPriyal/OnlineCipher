@@ -234,6 +234,7 @@ function blow_decrypt($ciphertext,$key)
 function rsa($plaintext,$key)
 {
     include 'vendor/autoload.php';
+    include "config.php";
      $rsa = new \phpseclib\Crypt\RSA();
      extract($rsa->createKey());
 
@@ -245,13 +246,37 @@ function rsa($plaintext,$key)
      $ct = bin2hex($ciphertext);
 
      //return $ciphertext;
+    // RSA libray generates and expects in a specific format, so we need to extract the key value and rebuild the key in the rsa_decrypt function
+    $pk = get_rsaKeyFormated($pk);
+
 
      $result = array(
          "key" => $pk,
          "text" => $ct
      );
 
+     if (isset($_SESSION['userEmail'])) {
+        $uemail = $_SESSION['userEmail'];
+        $stmt = $con->prepare("INSERT INTO userhistory(email, cipher, userstring, datetime, encryptedtext)  VALUES (?, ?, ?, NOW(), ?)");
+        $ciphername = 'RSA';
+        $stmt->bind_param("ssss", $uemail, $ciphername, $plaintext, $ciphertext);
+        $stmt->execute();
+        $stmt->close();
+    }
+
     return $result;
+
+
+}
+
+function get_rsaKeyFormated($k)
+{
+    $pos1 = strlen('-----BEGIN PUBLIC KEY----- ');
+    $pos2 = -strlen(' -----END PUBLIC KEY----');
+    $len = strlen($k);
+    $length = abs($len -$pos1 + $pos2);
+ 
+   return substr($k, $pos1, $length);
 
 
 }
@@ -262,8 +287,12 @@ function rsa_decrypt($ciphertext,$key)
     $rsa = new \phpseclib\Crypt\RSA();
 
     $ciphertext = hex2bin($ciphertext);
-    $rsa->setPublicKey($key);
-    $rsa->loadKey($key);
+
+    //rebuilding the key in the format RSA library expects
+    $finalkey = '-----BEGIN PUBLIC KEY----- ' . $key . ' -----END PUBLIC KEY----'  ;
+
+    $rsa->setPublicKey($finalkey);
+    $rsa->loadKey($finalkey);
    
 
     $plaintext = $rsa->decrypt($ciphertext);

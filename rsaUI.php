@@ -29,7 +29,7 @@
                             echo "<b> Sign in <a href =\"dashboard.php\">here</a> to encrypt File-content</b>"
                         ?>
                         <br><br>
-                        <input type="text" name="rsaKey" placeholder="Enter key" >
+                        <input type="text" name="rsaKey" placeholder="Enter key" value="RSA would generate a public key for you">
                         <br>
                         <input type="hidden" name="cipherName" value="rsa">
                         <input type=submit>

@@ -123,9 +123,10 @@
                                         
                                         echo "<blockquote><b>".$reply["text"]."</b></blockquote>";
                                         //echo "<input type=button value='copy encrypted text'>";  
-                                                                               
+                                          
+                                        echo "<h3>Your Public Key : &nbsp</h3>";
                                         echo "<blockquote id='blc'><b>".$reply["key"]."</b></blockquote>";                                        
-                                        //echo "<input type=button onclick=\"myfunc()\" value='copy Key'>";                                       
+                                                                               
 
                                         echo "<a href=\"http://twitter.com/share?text=$reply <--Encrypted using--> &url=http://web.engr.oregonstate.edu/~shahpri/OnlineCipher/&hashtags=Crypto,Encryption,NoOneKnowsWhatITwitted\" class=\"twitter-share-button\" data-show-count=\"true\">Tweet</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>";
 

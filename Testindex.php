@@ -30,9 +30,28 @@
 
     $pk ='-----BEGIN PUBLIC KEY----- MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCogtWSQ5NMGrfH5eChXrltMB8R Ldqbt/qWjHw6bTmn1jfArCm0MXVIT3P8HOrw1DU7Vg37f2YwmxSz+0KeAY6TbCH2 y4PdYCv6MPsqw06xKHQw0tSn0qx2d63mjv1qS0m6ySBgZtUUzGvCKYnPsil7bfgb ktNt6xkmMgKGM//A5QIDAQAB -----END PUBLIC KEY----';
 
-    echo $rsa->setPublicKey($pk);
-    $ciphertext='1d5b11b1f1f718d2d6d195ce34805687fe9ea9d6c7eca798f278e2e7a1852d1815496feb20150d09330cb19ea919e9d07da47a10e15a210337f8b7868469a434ad0d52e20b0d58e5338a818eca4322cb80a8f6064b11019f6accfd5c6b87b1a8a1c4d4715f9190cbddf2b4698d3318b83a85711ecbc5dec431eb482e5bbab659';
-    $rsa->loadKey($pk);
-    $ciphertext = hex2bin($ciphertext);
-    echo $rsa->decrypt($ciphertext);
+    echo gettype($pk);
+
+    $pos1 = strlen('-----BEGIN PUBLIC KEY----- ');
+    $pos2 = -strlen(' -----END PUBLIC KEY----');
+    $len = strlen($pk);
+    $length = abs($len -$pos1 + $pos2);
+
+   $actualKey = substr($pk, $pos1, $length);
+
+  $final = '-----BEGIN PUBLIC KEY----- ' . $actualKey . ' -----END PUBLIC KEY----'  ;
+
+   if($pk===$final)
+    echo 'TRUE';
+
+  else 
+    echo 'FALSE';
+    //echo $between;
+
+    //echo $final;
+    // echo $rsa->setPublicKey($pk);
+    // $ciphertext='1d5b11b1f1f718d2d6d195ce34805687fe9ea9d6c7eca798f278e2e7a1852d1815496feb20150d09330cb19ea919e9d07da47a10e15a210337f8b7868469a434ad0d52e20b0d58e5338a818eca4322cb80a8f6064b11019f6accfd5c6b87b1a8a1c4d4715f9190cbddf2b4698d3318b83a85711ecbc5dec431eb482e5bbab659';
+    // $rsa->loadKey($pk);
+    // $ciphertext = hex2bin($ciphertext);
+    // echo $rsa->decrypt($ciphertext);
   ?>
