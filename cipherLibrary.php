@@ -259,7 +259,7 @@ function rsa($plaintext,$key)
         $uemail = $_SESSION['userEmail'];
         $stmt = $con->prepare("INSERT INTO userhistory(email, cipher, userstring, datetime, encryptedtext)  VALUES (?, ?, ?, NOW(), ?)");
         $ciphername = 'RSA';
-        $stmt->bind_param("ssss", $uemail, $ciphername, $plaintext, $ciphertext);
+        $stmt->bind_param("ssss", $uemail, $ciphername, $plaintext, $ct);
         $stmt->execute();
         $stmt->close();
     }
