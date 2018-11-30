@@ -8,6 +8,7 @@ function getCipherList()
     $html .= "<li><a href=\"vigenerecipher.php\">Vigenere Cipher (PolyAlphabetic)</a></li>";
     $html .= "<li><a href=\"blowfishUI.php\">Blowfish Encryption</a></li>";
     $html .= "<li><a href=\"rsaUI.php\">RSA Encryption</a></li>";
+    $html .= "<li><a href=\"trippledes.php\">Triple Des</a></li>";
     $html .= "<li><a href=\"#\">Rail Fence Cipher</a></li>";
     return $html;
 }
