@@ -135,29 +135,6 @@
                                 else
                                     echo "Please Enter inputs properly";
                             }
-			    else if($_POST["cipherName"]=='TRIPLE DES'){
-                                if($_POST["tripledeskey"])
-                                {
-                                    if($_FILES["CipherFile"]["name"])
-                                    {
-                                        if(isset($_SESSION['userEmail'])){
-                                            $uemail=$_SESSION['userEmail'];
-                                            $target_dir = "CipherPlainUploads/";
-                                            $time = date("Y-m-d-His");
-                                            $target_file = $target_dir . "$uemail-".$time."-". basename($_FILES["CipherFile"]["name"]);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        echo "<h3>Encrypted Text : &nbsp</h3>";
-                                        $reply = tripledes($_POST["tripledestext"],$_POST["tripledeskey"]);
-                                        echo "<blockquote><b>".$reply."</b></blockquote>";
-                                        echo "<a href=\"http://twitter.com/share?text=$reply<--Encrypted using-->&url=http://web.engr.oregonstate.edu/~shahpri/OnlineCipher/&hashtags=Crypto,Encryption,NoOneKnowsWhatITwitted\" class=\"twitter-share-button\" data-show-count=\"true\">Tweet</a> <script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>";
-                                    }
-                                }
-                                else
-                                    echo "Please Enter Key for Triple des";
-                            }
 						?>
                     </section>
                 </div>
