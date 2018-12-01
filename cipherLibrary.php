@@ -8,6 +8,7 @@ function getCipherList()
     $html .= "<li><a href=\"vigenerecipher.php\">Vigenere Cipher (PolyAlphabetic)</a></li>";
     $html .= "<li><a href=\"blowfishUI.php\">Blowfish Encryption</a></li>";
     $html .= "<li><a href=\"rsaUI.php\">RSA Encryption</a></li>";
+    $html .= "<li><a href=\"trippledes.php\">Triple Des</a></li>";
     $html .= "<li><a href=\"#\">Rail Fence Cipher</a></li>";
     return $html;
 }
@@ -303,6 +304,35 @@ function rsa_decrypt($ciphertext,$key)
 
 }
 
+
+function tripledes($data, $secret)
+{
+    //Generate a key from a hash and retuen text
+    $key = md5(utf8_encode($secret), true);
+    //Take first 8 bytes of $key and append them to the end of $key.
+    $key .= substr($key, 0, 8);
+    //Pad for PKCS7
+    $blockSize = mcrypt_get_block_size('tripledes', 'ecb');
+    $len = strlen($data);
+    $pad = $blockSize - ($len % $blockSize);
+    $data .= str_repeat(chr($pad), $pad);
+    //Encrypt data
+    $encData = mcrypt_encrypt('tripledes', $key, $data, 'ecb');
+    return $encData;
+}
+function tripledes_decrypt($data, $secret)
+{
+    //Generate a key from a hash
+    $key = md5(utf8_encode($secret), true);
+    //Take first 8 bytes of $key and append them to the end of $key.
+    $key .= substr($key, 0, 8);
+    $data = base64_decode($data);
+    $data = mcrypt_decrypt('tripledes', $key, $data, 'ecb');
+    $block = mcrypt_get_block_size('tripledes', 'ecb');
+    $len = strlen($data);
+    $pad = ord($data[$len-1]);
+    return substr($data, 0, strlen($data) - $pad);
+}
 
 function getProfile()
 {

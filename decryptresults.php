@@ -116,6 +116,26 @@
                         }
                         else
                             echo "Please Enter Key for Caesar Cipher decryption";
+                    }else if($_POST["cipherName"]=='TRIPLE DES'){
+                        if($_POST["tripledeskey"])
+                        {
+                            if($_FILES["CipherFile"]["name"])
+                            {
+                                if(isset($_SESSION['userEmail'])){
+                                    $uemail=$_SESSION['userEmail'];
+                                    $target_dir = "CipherPlainUploads/";
+                                    $time = date("Y-m-d-His");
+                                    $target_file = $target_dir . "$uemail-".$time."-". basename($_FILES["CipherFile"]["name"]);
+                                }
+                            }
+                            else
+                            {
+                                echo "<h3>Decrypted Text : &nbsp</h3>";
+                                echo "<blockquote><b>".tripledes_decrypt($_POST["tripledesEncryptedtext"],$_POST["tripledeskey"])."</b></blockquote>";
+                            }
+                        }
+                        else
+                            echo "Please Enter Key for Triple des decryption";
                     }
                     ?>
                 </section>
